@@ -26,7 +26,7 @@ router.post('/', auth, uploader.single('thumbnail'), (req, res) => {
 
     if (title != '' && description != '') {
         const maxId = Math.max(...productos.map(element => +element.id));
-        const newProduct = { id: maxId + 1, title: title, description: description };
+        const newProduct = { id: maxId + 1, title: 'Botella deportiva', description: 'Una botella deportiva' };
         productos.push(newProduct);
         res.status(200).send({ error: null, data: newProduct, file: req.file });
     } else {
@@ -34,7 +34,7 @@ router.post('/', auth, uploader.single('thumbnail'), (req, res) => {
     }
 });
 
-router.put('/:id', auth, (req, res) => {
+router.put('/', auth, (req, res) => {
     const id = parseInt(req.params.id);
     const index = productos.findIndex(element => element.id === id);
     
@@ -46,7 +46,7 @@ router.put('/:id', auth, (req, res) => {
     }
 });
 
-router.delete('/:id', auth, (req, res) => {
+router.delete('/', auth, (req, res) => {
     const id = parseInt(req.params.id);
     const index = productos.findIndex(element => element.id === id);
     

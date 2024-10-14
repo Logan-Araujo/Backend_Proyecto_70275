@@ -1,0 +1,86 @@
+<link rel="stylesheet" href=" https://cdn.jsdelivr.net/npm/sweetalert2@11.14.1/dist/sweetalert2.min.css">
+
+<div>
+    <h1>Productos</h1>
+    <h2>Ejemplo de producto Socket.io</h2>
+</div>
+
+{{#if isAdmin}}
+        <ul>
+        {{#each users}}
+        <li>{{this.id}}, {{this.title}}, {{this.description}}</li>
+        {{/each}}
+        </ul>
+    {{/if}}
+
+<div style="margin-top: 2em; border: 1px solid #666; padding: 1em; width: 360px;"></div>
+    <p id="msgList" style="padding: 0; margin: 0;"></p>
+</div>
+
+<div style="margin-left: 1em; margin-top: 2em;">
+    <input class="form-control" type="number" min="1" max="10" id="msg" name="msg" placeholder="Agregar la cantidad que desea comprar" style="width: 360px;">
+</div>
+
+<script src="https://cdn.socket.io/4.7.5/socket.io.min.js" integrity="sha384-2huaZvOR9iDzHqslqwpR87isEmrfxqyWOF7hr7BY6KG0+hVKLoEXMPUJw3ynWuhO" crossorigin="anonymous"></script>
+{{!--<script src="/socket.io/socket.io.js"></script>--}}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.14.1/dist/sweetalert2.all.min.js"></script>
+<script type="module">
+
+    const product = { productName: '' };
+
+    const msgField = document.getElementById('msg');
+    const msgList = document.getElementById('msgList');
+
+    const askProduct = async () => {
+        const result = await Swal.fire({
+            title: 'Productos',
+            input: 'text',
+            text: 'Hola!, indicá el nombre del producto que te gustaria agregar',
+            inputValidator: val => !val && 'Indicar producto!',
+            allowOutsideClick: false
+        });
+        product.productName = result.value || 'Producto';
+    }
+
+     const notify = (text) => {
+        Swal.fire({
+            text: text,
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+        });
+    }
+
+
+    const socketClient = io();
+
+    socketClient.on('connect', async () => {
+        console.log('Conectado servidor socket.io')
+        await askProduct();
+        socketClient.emit('new_product_data', { product: product.productName });
+
+        socketClient.on('new_general_msg', data => {
+            msgList.innerHTML += `<br /><strong>[${data.product}</strong>] ${data.msg}`;
+    });
+
+    socketClient.on('new_product', data => {
+        notify(`${data.product} se ha agregado a la lista!`);
+    });
+
+    socketClient.on('current_messages', data => {
+        msgList.innerHTML = '';
+        data.forEach(msg => {
+            msgList.innerHTML += `<br /><strong>[${msg.product}</strong>] ${msg.msg}`;
+        });
+    });
+
+        msgField.addEventListener('keyup', event => {
+        if (event.key === 'Enter' && msgField.value !== '') {
+            const data = { product: product.productName, msg: msgField.value };
+            socketClient.emit('new_own_msg', data);
+            msgField.value = '';
+        }
+    });
+    });
+</script>
