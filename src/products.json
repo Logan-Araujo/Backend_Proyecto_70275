@@ -1,0 +1,11 @@
+[
+    { "title" : "Botella grande" , "description" : "Una botella grande", "size" : "large", "price" : "10000"},
+    { "title" : "Botella mediana" , "description" : "Una botella mediana", "size" : "medium", "price" : "5000"},
+    { "title" : "Botella pequeña" , "description" : "Una botella pequeña", "size" : "small", "price" : "1000"},
+    { "title" : "Botella de agua grande" , "description" : "Una botella de agua grande", "size" : "large", "price" : "11000"},
+    { "title" : "Botella de agua mediana" , "description" : "Una botella de agua mediana", "size" : "medium", "price" : "6000"},
+    { "title" : "Botella de agua pequeña" , "description" : "Una botella de agua pequeña", "size" : "small", "price" : "2000"},
+    { "title" : "Botella de jugo grande" , "description" : "Una botella de jugo grande", "size" : "large", "price" : "12000"},
+    { "title" : "Botella de jugo mediana", "description" : "Una botella de jugo mediana", "size" : "medium", "price" : "7000"},
+    { "title" : "Botella de jugo pequeña", "description" : "Una botella de jugo pequeña", "size" : "small", "price" : "3000"}
+]

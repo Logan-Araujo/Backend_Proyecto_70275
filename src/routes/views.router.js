@@ -1,27 +1,43 @@
 import { Router } from 'express';
+import ProductController from '../dao/products.controller.js';
+import CartController from '../dao/carts.controller.js';
 
 const router = Router();
+const controller = new ProductController
+const cart = new CartController
 
-const productos = [
-    { id: 1, title: 'BotellaGrande', description: 'Botella de agua Grande', code: '001', price: '10000', stock: 10, category: 'botellas' },
-    { id: 2, title: 'BotellaMediana', description: 'Botella de agua mediana', code: '002', price: '5000', stock: 10, category: 'botellas' },
-    { id: 3, title: 'BotellaPequeña', description: 'Botella de agua pequeña', code: '003', price: '1000', stock: 10, category: 'botellas' }
-];
-
-router.get('/', (req, res) => {
-    const data = {
-        isAdmin: true,
-        users: productos
-    }
-    res.status(200).render('index', data);
+router.get('/chat', (req, res) => {
+    const data = {};
+    
+    res.status(200).render('chat', data);
 });
 
-router.get('/realtimeproducts', (req, res) => {
-    const data = {
-        isAdmin: true,
-        users: productos
-    };
-    res.status(200).render('realtimeproducts', data);
+router.get('/products/:pg?', async (req, res) => {
+    const pg = req.params.pg || 1;
+    const data = await controller.getPaginated(pg);
+    console.log(data);
+    
+    res.status(200).render('products', { products: data });
+});
+
+router.get('/carts/:pg?', async (req, res) => {
+    const pg = req.params.pg || 1;
+    const data = await cart.getPaginated(pg);
+    console.log(data);
+    
+    res.status(200).render('carts', { carts: data });
+});
+
+router.get('/newproduct', (req, res) => {
+    const data = {};
+    
+    res.status(200).render('newproduct', data);
+});
+
+router.get('/newcart', (req, res) => {
+    const data = {};
+    
+    res.status(200).render('newcart', data);
 });
 
 export default router;

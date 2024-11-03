@@ -1,16 +1,14 @@
-<div>
+{{!--<div>
     {{!-- <img src="https://styles.redditmedia.com/t5_5blkvq/styles/communityIcon_t5ji6wuld2z71.jpg?format=pjpg&s=1672be49333cd14749784be8bbc3c968a033d8e0" style="width: 300px;"> --}}
-    {{!--<img src="/static/img/logo_coderhouse.png" style="width: 350px;">--}}
     <h1>Tu {{title}}, {{desciption}} esta lista!</h1>
 
     {{#if isAdmin}}
         <ul>
-        {{#each users}}
+        {{#each }}
         <li>{{this.id}}, {{this.title}}, {{this.description}}</li>
         {{/each}}
         </ul>
     {{/if}}
-
 
 
 </div>

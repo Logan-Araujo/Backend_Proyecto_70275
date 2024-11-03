@@ -1,0 +1,60 @@
+<style>
+    .newproduct-container {
+        margin-top: 64px !important;
+        max-width: 360px;
+        margin: auto;
+        padding: 32px;
+        border-radius: 0.5em;
+        color: #fff;
+        border: 1px solid #666;
+    }
+
+    .a2 {
+        color: #e1e1e1;
+    }
+
+    .a2:hover {
+        color: #fff;
+    }
+</style>
+
+<link rel="stylesheet" href=" https://cdn.jsdelivr.net/npm/sweetalert2@11.14.1/dist/sweetalert2.min.css">
+<script src="https://cdn.socket.io/4.7.5/socket.io.min.js" integrity="sha384-2huaZvOR9iDzHqslqwpR87isEmrfxqyWOF7hr7BY6KG0+hVKLoEXMPUJw3ynWuhO" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.14.1/dist/sweetalert2.all.min.js"></script>
+
+<script>
+    Swal.fire({
+  title: "Bienvenid@ a la tienda de botellas!",
+  text: "Añade un nuevo producto!",
+  icon: "info"
+});
+</script>
+
+<div class="newproduct-container">
+    <h1><b>Tienda de botellas</b></h1>
+    <h2><b>Carga de nuevo producto</b></h2>
+
+    <form action="/api/products" method="post" enctype="multipart/form-data">
+        <div class="input-group" style="width: 300px; margin-bottom: 32px;">
+            <span class="input-group-text" id="group2"><i class="fa-solid fa-lock"></i></span>
+            <input type="text" name="title" class="form-control" placeholder="Nombre" required="required" autofocus="autofocus">
+        </div>
+
+        <div class="input-group" style="width: 300px; margin-bottom: 32px;">
+            <span class="input-group-text" id="group2"><i class="fa-solid fa-lock"></i></span>
+            <input type="text" name="size" class="form-control" placeholder="size" required="required">
+        </div>
+
+        <div class="input-group" style="width: 300px; margin-bottom: 32px;">
+            <span class="input-group-text" id="group2"><i class="fa-solid fa-lock"></i></span>
+            <input type="text" name="description" class="form-control" placeholder="Description" required="required">
+        </div>
+
+        <div class="input-group" style="width: 300px; margin-bottom: 32px;">
+            <span class="input-group-text" id="group2"><i class="fa-solid fa-lock"></i></span>
+            <input type="text" name="price" class="form-control" placeholder="Price" required="required">
+        </div>
+                
+        <button type="submit" class="btn btn-success">Cargar</button>
+    </form>
+</div>

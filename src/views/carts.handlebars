@@ -1,0 +1,20 @@
+<div>
+    <h1><b>Tienda de botellas</b></h1>
+    <h2><b>Carritos</b></h2>
+    
+    <h3>Pg {{carts.page}} / {{carts.totalPages}} (sig -> {{carts.nextPage}})</h3>
+
+    <form action="/views/carts/1">
+    <button>Pag 1</button>
+    </form>
+    <form action="/views/carts/2">
+    <button>Pag 2</button>
+    </form>
+    <form action="/views/carts/3">
+    <button>Pag 3</button>
+    <ul class="list-group">
+        {{#each carts.docs}}
+            <li class="list-group-item">{{this.title}} -> {{this.description}} ({{this.size}}): {{this.price}}</li>
+        {{/each}}
+    </ul>
+</div>
